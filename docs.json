@@ -24,14 +24,15 @@
             ]
           },
           {
-            "group": "Customization",
+            "group": "Online Payments",
             "pages": [
-              "essentials/settings",
-              "essentials/navigation"
+              "online/overview",
+              "paymentmethods"
+              
             ]
           },
           {
-            "group": "Writing content",
+            "group": "Point of Sale",
             "pages": [
               "essentials/markdown",
               "essentials/code",
