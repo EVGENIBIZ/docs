@@ -1,4 +1,4 @@
-{
+boarding{
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
   "name": "Mint Starter Kit",
@@ -27,27 +27,22 @@
             "group": "Online Payments",
             "pages": [
               "online/overview",
-              "paymentmethods"
+              "onlline/paymentmethods",
+              "online/onboarding"
               
             ]
           },
           {
-            "group": "Point of Sale",
+            "group": "Payment Processing",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/reusable-snippets"
+              "PaymentProcessing/overview",
+              "PaymentProcessing/authandcapture",
+              "PaymentProcessing/refund",
+              "PaymentProcessing/chargeback",
+              "PaymentProcessing/settle"
             ]
           },
-          {
-            "group": "AI tools",
-            "pages": [
-              "ai-tools/cursor",
-              "ai-tools/claude-code",
-              "ai-tools/windsurf"
-            ]
-          }
+          
         ]
       },
       {
