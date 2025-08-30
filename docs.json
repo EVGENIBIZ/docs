@@ -28,7 +28,8 @@
                         "pages": [
                             "online/overview",
                             "online/paymentmethods",
-                            "online/onboarding"
+                            "online/onboarding",
+                            "online/testing"
                         ]
                     },
                     {
@@ -39,6 +40,14 @@
                             "PaymentProcessing/refund",
                             "PaymentProcessing/chargeback",
                             "PaymentProcessing/settle"
+                        ]
+                    },
+                  {
+                        "group": "Compliance",
+                        "pages": [
+                            "compliance/overview",
+                            "compliance/dataretentioin",
+                            "compliance/branding"
                         ]
                     }
                 ]

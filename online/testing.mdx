@@ -1,0 +1,134 @@
+---
+title: "Testing and Sandbox"
+description: "Before going live, you can test your webshop integration in the Smart Pay Sandbox. This environment simulates real transactions, allowing you and your developers to verify that everything works correctly without processing actual payments."
+---
+
+#### <Icon icon="circle-check" color="#008000" />**What you can test**
+
+- Creating test transactions with different payment methods.
+- Payment status updates (successful, failed, cancelled).
+- Refund flows and settlement reporting.
+- API or plugin behaviour in different scenarios.
+
+#### <Icon icon="do-not-enter" color="#ff0000" />**What you cannot test**
+
+- **iDEAL QR** – This method cannot be simulated in Sandbox. It only works with a real Rabobank account and live payments.
+- Settlement to your actual bank account. The sandbox only simulates the flow; no actual money is transferredmimics the flow; no money is actually moved.
+
+#### **How to get started**
+
+- Generate **test Signing Key and Refresh Token** in your Smart Pay Dashboard. Navigate to "Self service – Webshops," click the three dots, then "Details." You'll find keys for both the production environment and the test environment (Sandbox).
+- Connect your webshop to the Sandbox endpoint (documented in the [<u>Developer Portal</u>](https://developer.rabobank.nl/overview/rabo-smart-pay)).
+- Use the provided [**<u>test cards and scenarios</u>**](https://docs.google.com/document/d/1EllefItS2oouOxOkrAZgrWUY_8U8MYEGOe16Y3BKtuw/edit?tab=t.88rk0mgncp2y#heading=h.vtgfphahpe8r) to check different outcomes.
+- Developers can explore[<u>sample code and SDKs on GitHub</u>](https://github.com/rabobank-nederland)  to speed up testing.
+
+#### **Testing scenarios**
+
+Use the Rabo Smart Pay Sandbox to verify how your system handles different statuses and flows for each payment method. The Sandbox simulates outcomes based on the **amount** you send in the order announcement.
+
+#### **Transaction statuses**
+
+Not all methods use every status.
+
+| **Status**  | **Explanation**                        |
+| :---------- | :------------------------------------- |
+| IN_PROGRESS | The transaction is still in progress   |
+| SUCCESS     | The transaction was successful         |
+| CANCELLED   | The consumer cancelled the transaction |
+| EXPIRED     | The payment expired due to inactivity  |
+| FAILURE     | The payment failed                     |
+
+**Important:** if you use an **unspecified amount**, the transaction defaults to **SUCCESS**.
+
+<AccordionGroup>
+  <Accordion title="iDEAL">
+    Scenario matrix
+
+    | **Amount (in cents)** | **Result**                               |
+    | :-------------------- | :--------------------------------------- |
+    | 100                   | SUCCESS                                  |
+    | 200                   | CANCELLED                                |
+    | 300                   | EXPIRED                                  |
+    | 400                   | IN_PROGRESS for 20 minutes, then EXPIRED |
+    | 500                   | FAILURE                                  |
+    | 600                   | IN_PROGRESS for 1 minute, then SUCCESS   |
+
+    Example: successful iDEAL payment
+
+    1. Create an order announcement for **€1.00**.
+    2. Open the checkout page.
+    3. Select \*\*iDEAL \*\*and complete payment.
+    4. The transaction receives status **SUCCESS**.
+    5. The shopper returns to your webshop.
+    6. Verify that your system retrieves and processes the **SUCCESS** status.
+  </Accordion>
+  <Accordion title="Cards and Bancontact">
+    Supported brands in Sandbox: **Mastercard, Visa, Maestro, V PAY, Bancontact**.\
+    Apple Pay is currently **not supported** in the Sandbox.
+
+    Scenario matrix
+
+    | **Amount (in cents)** | **Result** |
+    | :-------------------- | :--------- |
+    | 1000                  | SUCCESS    |
+    | 5000                  | FAILURE    |
+
+    Test cards
+
+    Use the following details during Sandbox testing.
+
+    | **Brand**  | **Card number**         | **Expiry** | **CVC** |
+    | :--------- | :---------------------- | :--------- | :------ |
+    | Mastercard | 5500 0000 0000 0004     | 12/25      | 000     |
+    | Visa       | 4111 1111 1111 1111     | 12/25      | 000     |
+    | Maestro    | 6333 3333 3333 3333 336 | 12/25      | n.a.    |
+    | V PAY      | 4370 0000 0000 0061     | 12/25      | n.a.    |
+    | Bancontact | 6703 4200 5545 65015    | 12/25      | n.a.    |
+
+    Tip: spaces in card numbers above are only for readability.
+
+    Example: successful card payment
+
+    1. Create an order announcement for **€10.00**.
+    2. Open the checkout page and select a **credit or debit card**.
+    3. Enter a Sandbox test card, name **John Doe**, and email [**john@doe.nl**](mailto:john@doe.nl).
+    4. Click **Pay**. The transaction receives status **SUCCESS**.
+    5. Verify that your system retrieves and processes the **SUCCESS** status.
+  </Accordion>
+  <Accordion title="Card on File (CoF)">
+    The Sandbox supports saving and using stored cards for **Mastercard, Visa, Maestro, V PAY**.
+
+    **To enable CoF** in your order announcement, include:
+
+    - email
+    - shopperRef
+    - enableCardOnFile = TRUE
+
+    You can test:
+
+    - Storing a card
+    - Paying with a stored card
+    - Listing stored cards
+    - Deleting a stored card
+
+    Use the **same test cards and scenarios** listed above for outcomes.
+  </Accordion>
+  <Accordion title="PayPal">
+    Scenario matrix
+
+    | **Amount (in cents)** | **Result** |
+    | :-------------------- | :--------- |
+    | 100                   | SUCCESS    |
+    | 200                   | CANCELLED  |
+    | 500                   | FAILURE    |
+
+    Example: successful PayPal payment
+
+    1. Create an order announcement for **€1.00**.
+    2. Open the checkout page and select **PayPal**.
+    3. The transaction immediately receives status **SUCCESS**.
+    4. The shopper returns to your webshop.
+
+    Verify that your system retrieves and processes the **SUCCESS** status.
+  </Accordion>
+</AccordionGroup>
