@@ -17,6 +17,8 @@
             "group": "Getting started",
             "pages": [
               "index",
+              "whocanuse",
+              "whereandhowcanuse",
               "eqandsoft",
               "features"
             ]
