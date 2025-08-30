@@ -1,0 +1,15 @@
+---
+title: "Authorisation and Capture"
+description: "Description of your new file."
+---
+
+When a customer pays with a card, the transaction first creates an **authorisation** – a temporary hold on the customer’s account. You then need to **capture** this amount for the funds to be transferred.
+
+You can choose how to capture funds:
+
+- **Direct capture** – Authorisation and capture happen in one step. This is the default setting and is supported in both Dashboard and API.
+- **Late capture** – Authorise now, capture later (valid for up to **6 days** by default). Some industries (such as hotels, travel, and car rentals) may benefit from longer authorisation windows of up to **30 days**, depending on the scheme and issuer rules. When Late capture is used, do not attempt refunds until day 7 (refunds before capture would fail).
+
+If you decide not to proceed, you can **void** the authorisation before capture, which releases the hold for the customer.
+
+If you don’t capture within the authorisation validity period, the authorisation expires automatically, and no funds are transferred.
