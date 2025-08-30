@@ -1,0 +1,26 @@
+---
+title: "Going Live"
+description: "When you’re ready to accept real payments, switch your webshop from the test environment to the production environment."
+---
+
+<Steps>
+  <Step title="Generate your production keys">
+    - In the Smart Pay Dashboard, go to **Self service → Webshops → three dots → Details → Generate production keys**.
+    - You’ll receive a **Refresh Token** and a **Signing Key**.
+    - Copy these immediately – they can only be shown once. Later, you can only view the first and last four characters. If you lose them, you will need to generate new keys.
+  </Step>
+  <Step title="Configure your webhook">
+    - The [webhook](/technical/webhooks) is **mandatory** in production.
+    - Enter your production webhook in the Dashboard: **Self service → Webshops → 3 dots → Details → Integration settings**.
+
+    The webhook ensures you always receive the final [<u>payment status</u>](/technical/webhooks), even if the customer does not return to your webshop.
+  </Step>
+  <Step title="Update your integration">
+    - Change the endpoint URL from the Sandbox to the production URL:\
+      https://betalen.rabobank.nl/omnikassa-api
+
+    Replace test credentials with your **production Refresh Token and Signing Key**.
+  </Step>
+</Steps>
+
+After these steps, your OnlineKassa is live, and customers can pay through the secure Rabobank environment.

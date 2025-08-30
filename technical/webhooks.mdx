@@ -1,0 +1,74 @@
+---
+title: "Payment status updates and webhooks"
+description: "Rabo OnlineKassa uses webhooks to keep your webshop informed of payment status changes. This ensures your system can update orders automatically without manual checks."
+---
+
+#### **How it works**
+
+- During webshop setup in the Smart Pay Dashboard, you configure an **AutomaticResponseUrl** (webhook endpoint).
+- Every time a transaction status changes (_authorised, captured, refunded, cancelled, expired_), OnlineKassa sends a **JSON message via HTTP(S) POST** to this URL.
+- The message is digitally signed with your **Signing Key**. You must validate the signature to ensure the data originates from Rabobank and has not been tampered with.
+
+#### **Retry behaviour**
+
+If your endpoint does not return **HTTP 200 OK**, Rabobank retries sending the notification according to the schedule below:
+
+| **Number of unsuccessful attempts** | **Time until next attempt** |
+| :---------------------------------- | :-------------------------- |
+| 1                                   | 2 minutes                   |
+| 2                                   | 5 minutes                   |
+| 3                                   | 10 minutes                  |
+| 4                                   | 15 minutes                  |
+| 5                                   | 30 minutes                  |
+| 6                                   | 1 hour                      |
+| 7                                   | 2 hours                     |
+| 8                                   | 4 hours                     |
+| 9–29                                | Every 8 hours               |
+
+After 29 unsuccessful attempts, no further retries are made. Your system must then use the **Transaction API** to retrieve the final status.
+
+#### **Technical requirements**
+
+**Protocols and ports**
+
+- **Supported protocols**: HTTP and HTTPS. Rabobank strongly recommends **HTTPS** at all times.
+- **Ports**: only port **80 (HTTP)** and **443 (HTTPS)** are supported. Other port numbers are not allowed.
+
+**Certificates and CA chain**
+
+- For HTTPS, you must install a valid **server certificate** from a recognised Certificate Authority.
+- All required **intermediate CA certificates** must also be installed. If any are missing, Rabo OnlineKassa cannot validate your server and will not send notifications.
+- Self-signed certificates are **not supported**.
+- For more information, refer to the[ <u>DigiCert SSL installation guide</u>](https://www.digicert.com/ssl-certificate-installation.htm).
+
+**TLS and cipher suites**
+
+- Notifications use **TLS 1.2**.
+- Your server must support at least one of the following cipher suites:
+  - TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384
+  - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+  - TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384
+  - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
+- For Diffie-Hellman (DH) configurations, the key size must be **between 1024 and 2048 bits**.
+
+<Note>
+  **Network considerations**
+
+  - If your firewall blocks requests, you must allow connections from the domain:
+    - [out.pay.rabobank.nl](http://out.pay.rabobank.nl)
+    - Perform **dynamic DNS lookups** on this domain to resolve the A-records. IP addresses can change at any time without notice, so your system must be updated regularly.
+  - If you use **Cloudflare**, configure an additional firewall rule in your Cloudflare Dashboard to allow webhook messages. Example:
+    - Rule: (http.user_agent contains "Java/1.8.0\_")
+    - If notifications still do not arrive, add an allow rule for the IP addresses resolved from [out.pay.rabobank.nl](http://out.pay.rabobank.nl).
+  - Webhooks cannot be configured on domains under **“**[**webhook.site**](http://webhook.site)**”** — these are blocked.
+</Note>
+
+<Tip>
+  **Best practices**
+
+  - Always **verify the digital signature** with your Signing Key.
+  - Respond with HTTP 200 quickly (under 5 seconds) to avoid retries.
+  - Log all incoming messages for audit purposes.
+  - Treat webhook payloads as **asynchronous notifications** — always confirm the final state via the Transaction API.
+  - Keep your endpoint highly available to minimise missed messages
+</Tip>
