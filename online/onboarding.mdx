@@ -1,0 +1,31 @@
+---
+title: "Onboarding process and timelines"
+description: "Getting started with Rabo OnlineKassa is straightforward. You set up your webshop connection once, and then you can activate and manage payment methods directly in the Smart Pay Dashboard."
+---
+
+<Steps>
+  <Step title="Request Smart Pay" titleSize="h3">
+    - Request Rabo Smart Pay in your Rabo Business Banking environment.
+    - Once active, you’ll find all webshop and payment method options in the Smart Pay Dashboard.
+  </Step>
+  <Step title="Sign contracts for payment methods" titleSize="h3">
+    - In the Dashboard, select the payment methods you want to offer.
+    - Some methods (such as Visa, Mastercard, and Bancontact) are activated through Rabobank as the agent of Worldline.
+    - Others (like PayPal, Billink) require a separate agreement with that provider. We’ll guide you through the [<u>sign-up</u>](https://docs.google.com/document/d/1EllefItS2oouOxOkrAZgrWUY_8U8MYEGOe16Y3BKtuw/edit?tab=t.88rk0mgncp2y#heading=h.hubgkphl8hhk).
+    - Apple Pay does not need a separate contract – it follows the underlying card scheme.
+  </Step>
+  <Step title="Connect your webshop" titleSize="h3">
+    You can link your webshop to OnlineKassa in three ways. For a comprehensive overview of the integration options, visit [<u>https://pay.rabobank.nl/developers/</u>](https://pay.rabobank.nl/developers/) :
+
+    - [**<u>Plugin</u>**](https://payocity.nl/en/provider/smart-pay) – Fastest option if you use platforms like WooCommerce, Magento, or PrestaShop.
+    - [**<u>SDK</u>**](https://github.com/rabobank-nederland/omnikassa-sdk-doc) – Prebuilt building blocks in PHP, Java, and .NET for faster custom development.
+    - [**<u>API</u>**](https://developer.rabobank.nl/overview/rabo-smart-pay) – Full flexibility for a tailored checkout experience.
+
+    When you add a webshop in the Dashboard, a short setup wizard helps you generate two security keys: a **Signing Key** and a **Refresh Token**. These are unique for your webshop and secure the communication. Your Signing Key and Refresh Token expire periodically. We’ll email you 30 days in advance. If the remaining validity is under three months, create a replacement key in the Dashboard.
+  </Step>
+  <Step title="Test and Go Live" titleSize="h3">
+    - Use the free sandbox (test environment) to simulate transactions.
+    - Run a few test orders to confirm everything is working properly.
+    - Once successful, switch to production and start accepting payments.
+  </Step>
+</Steps>

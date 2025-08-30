@@ -11,36 +11,37 @@ If you agree with the customer, you should resolve the issue through:
 
 Timely resolution helps prevent chargebacks.
 
-### **Cards (Visa, Mastercard, Maestro, V PAY)**
+Chargeback and disputes details per payment method:
 
-- A cardholder can dispute a payment for reasons such as fraud, non-receipt of goods, or technical errors.
-- Chargebacks are processed through the card schemes and handled by Worldline (Rabobank’s acquirer).
-- The disputed amount is temporarily deducted from your account. You’ll see the case and status in your Smart Pay Dashboard.
-- You can contest a chargeback (“representment”) by submitting evidence, such as:
-  - Proof of delivery (tracking or signed receipt)
-  - Refund confirmation
-  - Customer communication
-  - Accepted terms and conditions
-- Deadlines are strict – typically **7–14 days** to respond.
-- If your evidence is accepted, the chargeback is reversed. If not, the cardholder keeps the refund.
-- Payments authenticated with **3D Secure (3DSv2)** usually shift liability for fraud away from you.
-- Chargeback fees may apply per case.
-
-### **iDEAL**
-
-- Payments are normally **final and irrevocable**. Customers cannot raise standard chargebacks.
-- Refunds are possible up to **180 days** after payment, via Dashboard or API.
-- In rare cases (fraud or technical error), Rabobank may reverse a payment and reclaim the amount from your account.
-
-### **PayPal**
-
-- Disputes and chargebacks are handled entirely through PayPal.
-- You manage these cases in your PayPal business account.
-
-### **Billink (Buy Now, Pay Later)**
-
-- Disputes are handled through Billink’s own process.
-- You can initiate refunds from the Smart Pay Dashboard; however, chargebacks are subject to Billink’s rules.
+<AccordionGroup>
+  <Accordion title="Cards (Visa, Mastercard, Maestro, V PAY)" icon="credit-card" iconType="regular">
+    - A cardholder can dispute a payment for reasons such as fraud, non-receipt of goods, or technical errors.
+    - Chargebacks are processed through the card schemes and handled by Worldline (Rabobank's acquirer).
+    - The disputed amount is temporarily deducted from your account. You'll see the case and status in your Smart Pay Dashboard.
+    - You can contest a chargeback ("representment") by submitting evidence, such as:
+      - Proof of delivery (tracking or signed receipt)
+      - Refund confirmation
+      - Customer communication
+      - Accepted terms and conditions
+    - Deadlines are strict – typically **7–14 days** to respond.
+    - If your evidence is accepted, the chargeback is reversed. If not, the cardholder keeps the refund.
+    - Payments authenticated with **3D Secure (3DSv2)** usually shift liability for fraud away from you.
+    - Chargeback fees may apply per case.
+  </Accordion>
+  <Accordion title="iDEAL" icon="sparkles">
+    - Payments are normally **final and irrevocable**. Customers cannot raise standard chargebacks.
+    - Refunds are possible up to **180 days** after payment, via Dashboard or API.
+    - In rare cases (fraud or technical error), Rabobank may reverse a payment and reclaim the amount from your account.
+  </Accordion>
+  <Accordion title="PayPal" icon="sparkles">
+    - Disputes and chargebacks are handled entirely through PayPal.
+    - You manage these cases in your PayPal business account.
+  </Accordion>
+  <Accordion title="Billink (Buy Now, Pay Later)" icon="sparkles">
+    - Disputes are handled through Billink's own process.
+    - You can initiate refunds from the Smart Pay Dashboard; however, chargebacks are subject to Billink's rules.
+  </Accordion>
+</AccordionGroup>
 
 <Warning>
   **Warning signs of possible fraud**

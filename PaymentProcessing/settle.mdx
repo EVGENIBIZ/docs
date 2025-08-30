@@ -1,0 +1,61 @@
+---
+title: "Settlement"
+description: "Description of your new file."
+---
+
+All successful transactions with Maestro, V PAY, Mastercard, Visa, Bancontact and iDEAL (status **SUCCESS**) are credited once per calendar day (00:00–24:00).
+
+Billink is settled directly by Billink while transactions still appear in the Dashboard.
+
+- Refunds and Retourpin (POS only) transactions are deducted from that day’s total.
+- If the balance is negative, the amount is debited from your account.
+- If the balance is exactly €0, no booking is made.
+- You can choose a different closing time (for example, 02:00 if your shop is open late).
+
+### **Payout reference structure**
+
+Each booking on your account includes an identifier, allowing you to reconcile it easilyto easily reconcile it.
+
+| **Level**                                                 | **Identifier** | **Length** | **Notes**                               |
+| :-------------------------------------------------------- | :------------- | :--------- | :-------------------------------------- |
+| Contract                                                  | Contract_ID    | 8 digits   | Padded with leading zeros if shorter    |
+| Shop                                                      | Shop_ID        | 8 digits   | Same rule as above                      |
+| Commercial Unit                                           | Verkpnt_ID     | 8 digits   | Same rule as above                      |
+| Webshop, Payment Request Plus or Cash Deposit (Afstorten) | Betaalpunt_ID  | 8 digits   | Same rule as above                      |
+| POS Terminal                                              | Terminal ID    | 6 digits   | Shorter, so the line shifts 2 positions |
+
+- After the date, the payout line displays a **cycle number** (usually “1”, but may be “2” or “3” if multiple payout cycles occur on the same day).
+- PayPal settlements are handled directly by the provider, not Rabobank.
+
+### **Example payout lines**
+
+Here’s how the credit lines appear on your bank statement:
+
+| **Scenario**                                       | **Line example**               |
+| :------------------------------------------------- | :----------------------------- |
+| Contract level                                     | Contract_12345678 20160701_1   |
+| Shop level                                         | Winkel_012345678 20160701_1    |
+| Commercial unit                                    | Verkpnt_12345678 20160701_1    |
+| POI (Terminal ID – 6 digits)                       | Betaalpunt_123456 20160701_1   |
+| POI (Webshop, Payment Request, Deposit – 8 digits) | Betaalpunt_12345678 20160701_1 |
+
+For deductions (**inhouding**), the format is the same, with Rabo Smart Pay inhouding instead of Omzet bijschrijving.
+
+### **Merchant Reconciliation Reference (MRR)**
+
+You can add your own **MRR** (8 alphanumeric characters, including underscore) to payout lines at shop, commercial unit, or payment point level.
+
+- If shorter than 8, it is padded with leading zeros.
+- The MRR appears as an extra line in the credit or deduction booking.
+- Example: Mrr_wink:test1 20160701_1
+
+### **Number of bookings per day**
+
+| **Payout level**           | **Max number of bookings per day**                                      |
+| :------------------------- | :---------------------------------------------------------------------- |
+| Contract                   | 1                                                                       |
+| Shop                       | Equal to number of businesses you have                                  |
+| Commercial unit            | Equal to number of commercial units                                     |
+| Point of Interaction (POI) | Equal to number of POIs (terminals, webshops, or Payment Request units) |
+
+_Note: If the day’s balance (turnover minus refunds/Retourpinnen) is exactly €0, no booking is created._
