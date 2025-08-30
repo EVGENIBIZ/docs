@@ -29,7 +29,8 @@
                             "online/overview",
                             "online/paymentmethods",
                             "online/onboarding",
-                            "online/testing"
+                            "online/testing",
+                            "online/golive"
                         ]
                     },
                     {
